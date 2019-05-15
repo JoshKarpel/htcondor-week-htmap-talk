@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM jupyter/scipy-notebook:6c6ebe8734e9
+FROM jupyter/scipy-notebook:abdb27a6dfbb
 ARG HTCONDOR_VERSION=8.9
 
 USER root
@@ -31,7 +31,7 @@ RUN pip install --no-cache-dir nbstripout git+https://github.com/htcondor/htmap.
 COPY . ${HOME}
 RUN cp ${HOME}/binder/condor_config.local /etc/condor/condor_config.local \
  && cp ${HOME}/binder/.htmaprc ${HOME}/.htmaprc \
- && nbstripout ${HOME}/* \
+ && nbstripout ${HOME}/demo/* \
  && chown -R ${NB_UID} ${HOME} \
  && chmod +x ${HOME}/binder/entrypoint.sh
 

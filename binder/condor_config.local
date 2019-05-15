@@ -29,7 +29,7 @@ SCHED_UNIV_RENICE_INCREMENT=5
 SHADOW_RENICE_INCREMENT=5
 
 # lie about the number of CPUs
-NUM_CPUS = $(DETECTED_CPUS) * 4
+NUM_CPUS = $(DETECTED_CPUS) * 2
 
 # If the job does not explicitly set an environment, define
 # some default environment variables that put Conda in the path.
