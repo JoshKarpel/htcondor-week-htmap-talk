@@ -29,9 +29,6 @@ JOB_RENICE_INCREMENT=5
 SCHED_UNIV_RENICE_INCREMENT=5
 SHADOW_RENICE_INCREMENT=5
 
-# lie about the number of CPUs
-NUM_CPUS = $(DETECTED_CPUS)
-
 JAVA =
 
 # If the job does not explicitly set an environment, define
