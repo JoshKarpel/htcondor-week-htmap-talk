@@ -2,7 +2,7 @@
 
 set -e
 
-CONTAINER_TAG=htmap-demo-edit
+CONTAINER_TAG=htmap-demo
 
 docker build -t ${CONTAINER_TAG} --file binder/Dockerfile .
 docker run -it --rm -p 8888:8888 --mount type=bind,source="$(pwd)"/demo,target=/home/jovyan/demo ${CONTAINER_TAG}

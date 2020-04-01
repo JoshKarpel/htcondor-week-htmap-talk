@@ -13,31 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM jupyter/scipy-notebook:abdb27a6dfbb
-ARG HTCONDOR_VERSION=8.9
-
-USER root
-
-RUN apt-get update \
- && apt-get -y install --no-install-recommends gnupg git  \
- && wget -qO - https://research.cs.wisc.edu/htcondor/ubuntu/HTCondor-Release.gpg.key | apt-key add - \
- && echo "deb  http://research.cs.wisc.edu/htcondor/ubuntu/${HTCONDOR_VERSION}/bionic bionic contrib" >> /etc/apt/sources.list \
- && apt-get -y update \
- && apt-get -y install htcondor \
- && apt-get -y clean \
- && rm -rf /var/lib/apt/lists/*
-
-RUN pip install --no-cache-dir nbstripout git+https://github.com/htcondor/htmap.git
-COPY . ${HOME}
-RUN cp ${HOME}/binder/condor_config.local /etc/condor/condor_config.local \
- && cp ${HOME}/binder/.htmaprc ${HOME}/.htmaprc \
- && nbstripout ${HOME}/demo/* \
- && chown -R ${NB_UID} ${HOME} \
- && chmod +x ${HOME}/binder/entrypoint.sh
+FROM htcondor/htc-scipy-notebook:latest
 
 WORKDIR ${HOME}/demo
-
-USER ${NB_USER}
-
-ENTRYPOINT ["../binder/entrypoint.sh"]
-CMD ["jupyter", "lab"]
